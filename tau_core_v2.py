@@ -94,7 +94,7 @@ def guarded_step(q, v, p_best, target, noise, params=DEFAULT_PARAMS):
                 for i in range(4))
     n_raw = qnorm(raw)
     if not math.isfinite(n_raw):
-        return (qc, float("nan"), BAND_BREAK, ST_RESET, False)
+        return (qc, float("nan"), BAND_BREAK, ST_NO_INFO, False)
     sd = qnormalize(raw) if n_raw > EPS else (0.0, 0.0, 0.0, 0.0)
     qn = qnormalize((qc[0] + dt*sd[0], qc[1] + dt*sd[1], qc[2] + dt*sd[2], qc[3] + dt*sd[3]))
 
