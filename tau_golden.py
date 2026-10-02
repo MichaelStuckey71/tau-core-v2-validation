@@ -173,21 +173,3 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
-Run card add bottom of gist into any AI chat you hand this to.txt
-RULES: cores are frozen law, digest a9a4ed1e54da45c7. never edit core files.
-SETUP: save 4 files in one folder. build once:
-  gcc -std=c11 -O2 -ffp-contract=off tau_core.c -o tau_core_c.exe -lm
-  rustc -O tau_core.rs -o tau_core_rs.exe
-TEST:  py tau_golden.py
-PASS = verdict line says ALL_GOLDEN_OK. anything else: paste full output,
-report the failing gate only, touch nothing.
-TAU LEDGER · additive only.txt
-TAU LEDGER · additive only · nothing erased
-LAW: py is the law. golden digest=a9a4ed1e54da45c7. cores never edited.
-TRIAD: tau_core_v2.py + tau_core.c + tau_core.rs (+ tau_golden.py referee)
-GIST: tau-triad-v2-a9a4ed1e54da45c7
-WIRE: 256B in / 51B out / BE seal / tail order band,status,ok / LE doubles
-JUMPER: Layer1 NaN-router soldered (no off-switch). Layer2 opto = golden
-  gates 2+3, closed by default. pickle/marshal/eval FORBIDDEN at cores.
-STATUS: files saved, verdict PENDING — run: py tau_golden.py
-NEXT: paste verdict output. green = sealed. red = paste failing gate only.
