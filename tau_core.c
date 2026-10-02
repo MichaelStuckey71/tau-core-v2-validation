@@ -7,11 +7,18 @@
    DRAW ORDER: SEQUENTIAL — q(4), v(4), tgt(4), then 4 noise/step.
    FIX-A: params tail gated. FIX-B: --step short read exits 2.
    FIX-C (APPLIED): n_raw non-finite -> loud (qc, NAN, BREAK, RESET, 0).
+   FIX-D (APPLIED): win32 stdio forced binary via _setmode(_O_BINARY).
+     ROOT CAUSE: text-mode xlate 0x0A -> 0D 0A; 51B frame -> 53B on Windows.
+     Math untouched — digest unchanged a9a4ed1e54da45c7.
    ========================================================================== */
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
 #include <math.h>
+#ifdef _WIN32
+#include <io.h>
+#include <fcntl.h>
+#endif
 
 #define EPS 1e-15
 #define ACT 1e-12
@@ -174,6 +181,10 @@ static int selftest(void){
 }
 
 int main(int argc, char **argv){
+#ifdef _WIN32
+    _setmode(_fileno(stdin),  _O_BINARY);
+    _setmode(_fileno(stdout), _O_BINARY);
+#endif
     const char *m = argc > 1 ? argv[1] : "--selftest";
     if (!strcmp(m, "--ping")){ printf("PONG\n"); return 0; }
     if (!strcmp(m, "--selftest")) return selftest();
